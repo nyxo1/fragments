@@ -11,5 +11,8 @@
     "url": "git+https://github.com/nyxo1/fragments.git"
   },
   "author": "VANSHDEEP KAUR KHATTRHA",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "prettier": "3.6.2"
+  }
 }
