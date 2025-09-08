@@ -1,0 +1,15 @@
+{
+  "name": "fragments",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Web API using node",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyxo1/fragments.git"
+  },
+  "author": "VANSHDEEP KAUR KHATTRHA",
+  "license": "UNLICENSED"
+}
