@@ -1,14 +1,35 @@
-/**
- * The main entry-point for the v1 version of the fragments API.
- */
 const express = require('express');
+const contentType = require('content-type');
+const { Fragment } = require('../../model/fragment');
+const logger = require('../../logger');
 
-// Create a router on which to mount our API endpoints
 const router = express.Router();
 
-// Define our first route, which will be: GET /v1/fragments
+logger.debug('Initializing /v1 API routes');
+
 router.get('/fragments', require('./get'));
 
-// Other routes (POST, DELETE, etc.) will go here later on...
+const rawBody = () =>
+  express.raw({
+    inflate: true,
+    limit: '5mb',
+    type: (req) => {
+      try {
+        const { type } = contentType.parse(req);
+        const supported = Fragment.isSupportedType(type);
+        logger.debug({ type, supported }, 'Parsing Content-Type for raw body');
+        return supported;
+      } catch (err) {
+        logger.warn({ err }, 'Failed to parse Content-Type');
+        return false;
+      }
+    },
+  });
+
+logger.info('Registering POST /v1/fragments route');
+router.post('/fragments', rawBody(), require('./post'));
+
+// Add GET by ID route
+router.get('/fragments/:id', require('./get-by-id'));
 
 module.exports = router;
