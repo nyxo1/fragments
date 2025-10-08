@@ -19,8 +19,7 @@ if (!(process.env.AWS_COGNITO_POOL_ID && process.env.AWS_COGNITO_CLIENT_ID)) {
 logger.info('Using AWS Cognito for auth');
 
 // Create a Cognito JWT Verifier, which will confirm that any JWT we
-// get from a user is valid and something we can trust. See:
-// https://github.com/awslabs/aws-jwt-verify#cognitojwtverifier-verify-parameters
+// get from a user is valid and something we can trust.
 const jwtVerifier = CognitoJwtVerifier.create({
   userPoolId: process.env.AWS_COGNITO_POOL_ID,
   clientId: process.env.AWS_COGNITO_CLIENT_ID,

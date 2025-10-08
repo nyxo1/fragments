@@ -1,7 +1,6 @@
 // src/auth/basic-auth.js
 
-// Configure HTTP Basic Auth strategy for Passport, see:
-// https://github.com/http-auth/http-auth-passport
+// Configure HTTP Basic Auth strategy for Passport
 
 const auth = require('http-auth');
 const passport = require('passport');

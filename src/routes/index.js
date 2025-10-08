@@ -29,7 +29,6 @@ router.get('/', (req, res) => {
   res.status(200).json(
     createSuccessResponse({
       author,
-      // Use your own GitHub URL for this!
       githubUrl: 'https://github.com/nyxo1/fragments',
       version,
     })
