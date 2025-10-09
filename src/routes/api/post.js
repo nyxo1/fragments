@@ -2,16 +2,15 @@
 const { Fragment } = require('../../model/fragment');
 const logger = require('../../logger');
 
+const { createSuccessResponse, createErrorResponse } = require('../../response');
+
 module.exports = async (req, res) => {
   try {
     // rawBody() middleware already validated Content-Type
     // If req.body isn't a Buffer, type wasn't supported
     if (!Buffer.isBuffer(req.body)) {
       logger.warn('Unsupported media type');
-      return res.status(415).json({
-        status: 'error',
-        error: { code: 415, message: 'Unsupported Media Type' },
-      });
+      return res.status(415).json(createErrorResponse(415, 'unsupported media type'));
     }
 
     const fragment = new Fragment({
@@ -27,25 +26,9 @@ module.exports = async (req, res) => {
 
     logger.info({ id: fragment.id }, 'Fragment created');
 
-    return res
-      .status(201)
-      .location(location)
-      .json({
-        status: 'ok',
-        fragment: {
-          id: fragment.id,
-          ownerId: fragment.ownerId,
-          created: fragment.created,
-          updated: fragment.updated,
-          type: fragment.type,
-          size: fragment.size,
-        },
-      });
+    return res.status(201).location(location).json(createSuccessResponse({ fragment }));
   } catch (err) {
     logger.error({ err }, 'Error creating fragment');
-    return res.status(500).json({
-      status: 'error',
-      error: { code: 500, message: 'Internal Server Error' },
-    });
+    return res.status(500).json(createErrorResponse(500, 'unable to create fragment'));
   }
 };

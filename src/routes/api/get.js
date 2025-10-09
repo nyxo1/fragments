@@ -1,7 +1,7 @@
 // src/routes/api/get.js
-const { createSuccessResponse } = require('../../response');
 const { Fragment } = require('../../model/fragment');
 const logger = require('../../logger');
+const { createSuccessResponse, createErrorResponse } = require('../../response');
 
 module.exports = async (req, res) => {
   try {
@@ -19,9 +19,6 @@ module.exports = async (req, res) => {
     );
   } catch (err) {
     logger.error({ err }, 'Error retrieving fragments');
-    res.status(500).json({
-      status: 'error',
-      error: { code: 500, message: 'Internal Server Error' },
-    });
+    res.status(500).json(createErrorResponse(500, 'unable to retrieve fragments'));
   }
 };

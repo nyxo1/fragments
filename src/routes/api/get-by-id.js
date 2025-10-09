@@ -1,6 +1,7 @@
 // src/routes/api/get-by-id.js
 const { Fragment } = require('../../model/fragment');
 const logger = require('../../logger');
+const { createErrorResponse } = require('../../response');
 
 module.exports = async (req, res) => {
   try {
@@ -15,9 +16,6 @@ module.exports = async (req, res) => {
     res.status(200).type(fragment.type).send(data);
   } catch (err) {
     logger.warn({ err, id: req.params.id }, 'Fragment not found');
-    res.status(404).json({
-      status: 'error',
-      error: { code: 404, message: 'Fragment not found' },
-    });
+    res.status(404).json(createErrorResponse(404, 'fragment not found'));
   }
 };
