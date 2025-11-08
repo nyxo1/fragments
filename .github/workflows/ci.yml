@@ -70,6 +70,7 @@ jobs:
         # 2. Use `install-ci-test` to do it in a single command, see https://docs.npmjs.com/cli/v8/commands/npm-install-ci-test
         # run: npm install-ci-test
         run: npm install-ci-test
+
   docker-hub:
     name: Build and Push to Docker Hub
     needs: [lint, dockerfile-lint, unit-tests]
