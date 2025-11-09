@@ -3,7 +3,7 @@
 // Configure HTTP Basic Auth strategy for Passport
 
 const auth = require('http-auth');
-const passport = require('passport');
+// const passport = require('passport');
 const authPassport = require('http-auth-passport');
 const logger = require('../logger');
 
