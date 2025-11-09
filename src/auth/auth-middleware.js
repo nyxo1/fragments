@@ -20,7 +20,7 @@ module.exports = (strategyName) => {
       // Something failed, let the the error handling middleware deal with it
       if (err) {
         logger.warn({ err }, 'error authenticating user');
-        return next(createErrorResponse(500, 'Unable to authenticate user'));
+        return res.status(500).json(createErrorResponse(500, 'Unable to authenticate user'));
       }
 
       // Not authorized, return a 401
