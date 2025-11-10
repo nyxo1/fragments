@@ -150,14 +150,24 @@ class Fragment {
     return this.mimeType.startsWith('text/');
   }
 
+  get isApplication() {
+    return this.mimeType.startsWith('application/');
+  }
+
   /**
    * Returns the formats into which this fragment type can be converted
    * @returns {Array<string>} list of supported mime types
    */
   get formats() {
-    // For now, just return the fragment's own mime type
-    // This will be expanded later to support conversions
-    return [this.mimeType];
+    const conversionMap = {
+      'text/plain': ['text/plain'],
+      'text/markdown': ['text/markdown', 'text/html', 'text/plain'],
+      'text/html': ['text/html', 'text/plain'],
+      'text/csv': ['text/csv', 'text/plain', 'application/json'],
+      'application/json': ['application/json', 'application/yaml', 'text/plain'],
+      'application/yaml': ['application/yaml', 'text/plain'],
+    };
+    return conversionMap[this.mimeType] || [this.mimeType];
   }
 
   /**
@@ -169,10 +179,13 @@ class Fragment {
     // List of supported types
     const validTypes = [
       'text/plain',
+      // Supported for assignment 2:
+      'text/markdown',
+      'text/html',
+      'text/csv',
+      'application/json',
+      'application/yaml',
       // Future types to be added:
-      // 'text/markdown',
-      // 'text/html',
-      // 'application/json',
       // 'image/png',
       // 'image/jpeg',
       // 'image/webp',

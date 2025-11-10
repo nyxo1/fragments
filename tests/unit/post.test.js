@@ -22,6 +22,81 @@ describe('POST /v1/fragments', () => {
     expect(res.body.status).toBe('ok');
   });
 
+  //
+  // Tests for assignment 2 additions
+  //
+  //authenticated users can create a markdown fragment
+  test('authenticated users can create a markdown fragment', async () => {
+    const res = await request(app)
+      .post('/v1/fragments')
+      .auth(auth.user, auth.pass)
+      .set('Content-Type', 'text/markdown')
+      .send('# This is a fragment');
+
+    expect(res.statusCode).toBe(201);
+    expect(res.body.status).toBe('ok');
+    expect(res.body.fragment.type).toMatch(/text\/markdown/);
+  });
+
+  // authenticated users can create a csv fragment
+  test('authenticated users can create a csv fragment', async () => {
+    const res = await request(app)
+      .post('/v1/fragments')
+      .auth(auth.user, auth.pass)
+      .set('Content-Type', 'text/csv')
+      .send('name,age\nAlice,30\nBob,25');
+
+    expect(res.statusCode).toBe(201);
+    expect(res.body.status).toBe('ok');
+    expect(res.body.fragment.type).toMatch(/text\/csv/);
+  });
+
+  //authenticated users can create an html fragment
+  test('authenticated users can create an html fragment', async () => {
+    const res = await request(app)
+      .post('/v1/fragments')
+      .auth(auth.user, auth.pass)
+      .set('Content-Type', 'text/html')
+      .send('<h1>This is a fragment</h1>');
+
+    expect(res.statusCode).toBe(201);
+    expect(res.body.status).toBe('ok');
+    expect(res.body.fragment.type).toMatch(/text\/html/);
+  });
+
+  // authenticated users can create a json fragment
+  test('authenticated users can create a json fragment', async () => {
+    const res = await request(app)
+      .post('/v1/fragments')
+      .auth(auth.user, auth.pass)
+      .set('Content-Type', 'application/json')
+      .send(JSON.stringify({ name: 'Alice', age: 30 }));
+
+    expect(res.statusCode).toBe(201);
+    expect(res.body.status).toBe('ok');
+    expect(res.body.fragment.type).toMatch(/application\/json/);
+  });
+
+  // authenticated users can create a yaml fragment
+  test('authenticated users can create a yaml fragment', async () => {
+    const yamlData = `
+    name: Alice
+    age: 30
+    `;
+    const res = await request(app)
+      .post('/v1/fragments')
+      .auth(auth.user, auth.pass)
+      .set('Content-Type', 'application/yaml')
+      .send(yamlData);
+
+    expect(res.statusCode).toBe(201);
+    expect(res.body.status).toBe('ok');
+    expect(res.body.fragment.type).toMatch(/application\/yaml/);
+  });
+  //
+  // end of assignment 2 additions
+  //
+
   // responses include all necessary and expected properties
   test('responses include expected properties and correct values', async () => {
     const data = 'Test fragment';
