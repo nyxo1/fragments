@@ -52,4 +52,39 @@ describe('GET /v1/fragments/:id', () => {
 
     expect(getRes.statusCode).toBe(404);
   });
+
+  //
+  //Assign 2 tests
+  // ===== NEW: Markdown to HTML conversion tests =====
+  //
+  test('can convert markdown fragment to HTML with .html extension', async () => {
+    const markdown = '# Hello World';
+
+    const postRes = await request(app)
+      .post('/v1/fragments')
+      .auth(auth.user, auth.pass)
+      .set('Content-Type', 'text/markdown')
+      .send(markdown);
+
+    const id = postRes.body.fragment.id;
+    const getRes = await request(app).get(`/v1/fragments/${id}.html`).auth(auth.user, auth.pass);
+
+    expect(getRes.statusCode).toBe(200);
+    expect(getRes.headers['content-type']).toMatch(/text\/html/);
+    expect(getRes.text).toContain('<h1>Hello World</h1>');
+  });
+
+  test('returns 415 for unsupported conversion', async () => {
+    const postRes = await request(app)
+      .post('/v1/fragments')
+      .auth(auth.user, auth.pass)
+      .set('Content-Type', 'text/plain')
+      .send('Plain text');
+
+    const id = postRes.body.fragment.id;
+    const getRes = await request(app).get(`/v1/fragments/${id}.html`).auth(auth.user, auth.pass);
+
+    expect(getRes.statusCode).toBe(415);
+    expect(getRes.body.status).toBe('error');
+  });
 });
