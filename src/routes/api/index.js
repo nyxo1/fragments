@@ -29,6 +29,9 @@ const rawBody = () =>
 logger.info('Registering POST /v1/fragments route');
 router.post('/fragments', rawBody(), require('./post'));
 
+// Add GET fragment info route
+router.get('/fragments/:id/info', require('./get-info'));
+
 // Add GET by ID route
 router.get('/fragments/:id', require('./get-by-id'));
 
