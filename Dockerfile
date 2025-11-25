@@ -44,7 +44,7 @@ COPY --chown=node:node ./tests/.htpasswd ./tests/.htpasswd
 COPY --chown=node:node package*.json ./
 
 # Switch to non-root user for security
-USER node
+# USER node
 
 # We run our service on port 8080
 EXPOSE 8080

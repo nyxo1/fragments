@@ -1,3 +1,7 @@
+// src/routes/index.js
+
+const { hostname } = require('os');
+
 const express = require('express');
 
 // version and author from package.json
@@ -31,6 +35,8 @@ router.get('/', (req, res) => {
       author,
       githubUrl: 'https://github.com/nyxo1/fragments',
       version,
+      // Include the hostname in the response
+      hostname: hostname(),
     })
   );
 });
