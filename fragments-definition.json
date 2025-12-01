@@ -4,10 +4,6 @@
       "cpu": 256,
       "environment": [
         {
-          "name": "AWS_COGNITO_POOL_ID",
-          "value": "us-east-1_W0aAys6RN"
-        },
-        {
           "name": "AWS_REGION",
           "value": "us-east-1"
         },
@@ -20,20 +16,16 @@
           "value": "80"
         },
         {
+          "name": "AWS_S3_BUCKET_NAME",
+          "value": "vkkhattrha-fragments"
+        },
+        {
           "name": "NODE_ENV",
           "value": "production"
         },
         {
-          "name": "AWS_COGNITO_CLIENT_ID",
-          "value": "66006l2vorffhul9pnure1ospo"
-        },
-        {
           "name": "LOG_LEVEL",
           "value": "info"
-        },
-        {
-          "name": "AWS_S3_BUCKET_NAME",
-          "value": "vkkhattrha-fragments"
         }
       ],
       "essential": true,
