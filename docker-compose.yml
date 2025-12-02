@@ -22,6 +22,7 @@ services:
       - AWS_SECRET_ACCESS_KEY=test
       - AWS_SESSION_TOKEN=test
 
+      - PORT=8080
       - AWS_REGION=us-east-1
       # Use the LocalStack endpoint vs. AWS for S3 AWS SDK clients.
       # NOTE: we use Docker's internal network to the localstack container
