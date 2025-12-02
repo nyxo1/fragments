@@ -23,7 +23,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 # We default to use port 8080 in our service
-ENV PORT=8080
+ENV PORT=80
 
 # Reduce npm spam when installing within Docker
 ENV NPM_CONFIG_LOGLEVEL=warn
@@ -47,7 +47,7 @@ COPY --chown=node:node package*.json ./
 # USER node
 
 # We run our service on port 8080
-EXPOSE 8080
+EXPOSE 80
 
 # Health check to monitor container health
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
