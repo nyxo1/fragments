@@ -59,8 +59,8 @@ class Fragment {
     if (expand && fragments) {
       return fragments.map((fragment) => {
         // Parse if it's a JSON string
-        const fragmentData = JSON.parse(fragment);
-        return new Fragment(fragmentData);
+        const data = typeof fragment === 'string' ? JSON.parse(fragment) : fragment;
+        return new Fragment(data);
       });
     }
 
