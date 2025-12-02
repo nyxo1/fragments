@@ -17,7 +17,7 @@ services:
       # Use the LOG_LEVEL set in the host environment, or default to info
       - LOG_LEVEL=${LOG_LEVEL:-info}
 
-      # ADD THESE THREE LINES:
+      # AWS Credentials for LocalStack (these are dummy values)
       - AWS_ACCESS_KEY_ID=test
       - AWS_SECRET_ACCESS_KEY=test
       - AWS_SESSION_TOKEN=test
