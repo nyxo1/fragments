@@ -137,11 +137,15 @@ class Fragment {
    * "text/html; charset=utf-8" -> "text/html"
    * @returns {string} fragment's mime type (without encoding)
    */
-  get mimeType() {
-    const { type } = contentType.parse(this.type);
-    return type;
-  }
 
+  //changes according to review suggestion in assignment 2
+  get mimeType() {
+    try {
+      return contentType.parse(this.type).type;
+    } catch {
+      return this.type;
+    }
+  }
   /**
    * Returns true if this fragment is a text/* mime type
    * @returns {boolean} true if fragment's type is text/*
@@ -193,8 +197,13 @@ class Fragment {
     ];
 
     // Parse the content type to get just the mime type without charset
-    const { type } = contentType.parse(value);
-    return validTypes.includes(type);
+    // change according to review suggestion in assignment 2
+    try {
+      const { type } = contentType.parse(value);
+      return validTypes.includes(type);
+    } catch {
+      return false;
+    }
   }
 }
 
