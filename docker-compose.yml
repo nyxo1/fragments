@@ -16,6 +16,8 @@ services:
       - HTPASSWD_FILE=tests/.htpasswd
       # Use the LOG_LEVEL set in the host environment, or default to info
       - LOG_LEVEL=${LOG_LEVEL:-info}
+      # Set NODE_ENV to test (not production) for CI/local testing
+      - NODE_ENV=test
 
       # AWS Credentials for LocalStack (these are dummy values)
       - AWS_ACCESS_KEY_ID=test
