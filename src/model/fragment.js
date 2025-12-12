@@ -146,6 +146,7 @@ class Fragment {
       return this.type;
     }
   }
+
   /**
    * Returns true if this fragment is a text/* mime type
    * @returns {boolean} true if fragment's type is text/*
@@ -156,6 +157,10 @@ class Fragment {
 
   get isApplication() {
     return this.mimeType.startsWith('application/');
+  }
+
+  get isImage() {
+    return this.mimeType.startsWith('image/');
   }
 
   /**
@@ -170,6 +175,11 @@ class Fragment {
       'text/csv': ['text/csv', 'text/plain', 'application/json'],
       'application/json': ['application/json', 'application/yaml', 'text/plain'],
       'application/yaml': ['application/yaml', 'text/plain'],
+      'image/png': ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif'],
+      'image/jpeg': ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif'],
+      'image/webp': ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif'],
+      'image/gif': ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif'],
+      'image/avif': ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif'],
     };
     return conversionMap[this.mimeType] || [this.mimeType];
   }
@@ -189,11 +199,12 @@ class Fragment {
       'text/csv',
       'application/json',
       'application/yaml',
-      // Future types to be added:
-      // 'image/png',
-      // 'image/jpeg',
-      // 'image/webp',
-      // 'image/gif',
+      // Supported for assignment 3:
+      'image/png',
+      'image/jpeg',
+      'image/webp',
+      'image/gif',
+      'image/avif',
     ];
 
     // Parse the content type to get just the mime type without charset

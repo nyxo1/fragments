@@ -35,6 +35,10 @@ router.get('/fragments/:id/info', require('./get-info'));
 // Add GET by ID route
 router.get('/fragments/:id', require('./get-by-id'));
 
+// Add PUT route to update fragments
+logger.info('Registering PUT /v1/fragments/:id route');
+router.put('/fragments/:id', rawBody(), require('./put'));
+
 // Add DELETE by ID route
 router.delete('/fragments/:id', require('./delete'));
 
